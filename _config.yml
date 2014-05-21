@@ -10,18 +10,18 @@ pygments: true
 # so be sure to set them if your theme uses them.
 #
 
-title : Yukang's Page
+title : zhuima's Page
 tagline: Don't Panic
 author :
-  name : yukang
+  name : zhuima
   email : moorekang@gmail.com
-  github : chenyukang
-  name: Yukang
+  github : zhuima
+  name: zhuima
   description: "Something noted by Yukang(Programming, Linux, C/C++, Algorithms, Scheme)"
 
 #markdown: rdiscount
 markdown: kramdown
-url: http://cyukang.com
+url: http://www.unix178.com
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
@@ -31,7 +31,7 @@ url: http://cyukang.com
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://cyukang.com
+production_url : http://www.unix178.com
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
