@@ -4,4 +4,4 @@ Disallow: /js/
 Disallow: /works/
 Disallow: /backs/
 
-Sitemap: <http://cyukang.com/sitemap.xml>
+Sitemap: <http://blog.unix178.com/sitemap.xml>
