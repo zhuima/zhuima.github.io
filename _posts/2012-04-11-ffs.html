@@ -1,0 +1,26 @@
+--- 
+published: false
+title: ffs
+meta: 
+  _edit_last: "1"
+type: post
+status: draft
+layout: post
+tags: 
+- Life|Notes
+---
+static inline int mffs( int x )
+{
+if (!x) {
+return 0;
+}
+else {
+int ret;
+__asm__("bsfl %1, %0; incl %0" : "=r" (ret) : "r" (x));
+return ret;
+}
+}
+
+顺向位扫描(bit scan forward)
+从右向左（从位0--&gt;位15或位31）扫描字或双字操作数oprd2中第一个含"1"的位，并把扫描到的第一个含'1'的位的位号送操作数oprd1
+AT&amp;T格式汇编指令bsfl类似bsf，只是源操作数和目的操作数顺序相反。

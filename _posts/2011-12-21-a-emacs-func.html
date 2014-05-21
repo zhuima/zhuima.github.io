@@ -1,0 +1,26 @@
+--- 
+published: true
+title: A Emacs func
+meta: 
+  qzone: "true"
+  views: "417"
+  _edit_last: "1"
+type: post
+status: publish
+layout: post
+tags: 
+- Emacs
+- Programming
+---
+这个操作好像经常要用到，拷贝当前光标连续的一段字符串(除了空白和换行), 写了个小函数来实现。
+<pre class="src"> 
+(<span style="color: #00ffff;">defun</span> <span style="color: #87cefa;">get-continue-string</span> ()
+  (interactive)
+  (skip-chars-backward <span style="color: #ffa07a;">"^ \n"</span>)
+  (setq low (point))
+  (skip-chars-forward <span style="color: #ffa07a;">"^ \n"</span>)
+  (setq high (point))
+  (copy-region-as-kill low high)
+  (message (buffer-substring low high)))
+
+(global-set-key (kbd <span style="color: #ffa07a;">"C-x y"</span>) 'get-continue-string)</pre>

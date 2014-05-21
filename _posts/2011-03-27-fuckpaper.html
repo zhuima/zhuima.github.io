@@ -1,0 +1,71 @@
+--- 
+published: true
+title: 论文吐槽
+
+meta: 
+  views: "1354"
+  qzone: "true"
+  _wp_old_slug: ""
+  _edit_last: "1"
+type: post
+status: publish
+layout: post
+tags: 
+- ACM
+- Backup
+- POJ
+---
+前些天在写毕业论文，开题弄了个什么神经网络什么数据融合，至今没搞懂过，真是没话说，但是又不得不硬着头皮写，废话连篇，说来说去就那么几句。做的东西本来挺简单的，没用到那么高深的理论，不过为了装装深度，硬要往上面套，希望最好别出什么问题吧。写论文的时候我就想嗄，写代码好玩多了，异常怀念那段天天在poj上写程序的日子。这两天交完初稿，继续做做题，一是玩玩，二是为了原来定下的一个小目标：毕业前水到500题，还差20。两个比较好玩也折腾得比较久的题目。
+<h4>poj 2050</h4>
+<p class="first">这题折腾了很久很久，刚开始误以为每个文件的最大行数为1500，最后因为输出格式问题。代码也比较长330行，954ms。
+使用数组作为hash，使用位图记录文件中存在的单词，idx为由单词转化得到的该单词在hash表中的index。</p>
+
+<pre class="src"><span style="color: #98f5ff;">unsigned</span> <span style="color: #98f5ff;">int</span> <span style="color: #4eee94;">docs_flag</span>[MAXDOC][(MAXWORDS+31)/32]; <span style="color: #5f9ea0; font-style: italic;">//</span><span style="color: #5f9ea0; font-style: italic;">记录某个文件中是否存在某个单词
+</span><span style="color: #98f5ff;">void</span> <span style="color: #daa520; font-weight: bold;">set_docflag</span>(<span style="color: #98f5ff;">int</span> <span style="color: #4eee94;">doc</span>[], <span style="color: #98f5ff;">unsigned</span> <span style="color: #98f5ff;">int</span> <span style="color: #4eee94;">idx</span>)
+{
+        doc[idx&gt;&gt;5] |= (1&lt;&lt;(idx&amp;0x1f));
+}
+
+<span style="color: #98f5ff;">int</span>  <span style="color: #daa520; font-weight: bold;">get_docflag</span>(<span style="color: #98f5ff;">int</span> <span style="color: #4eee94;">doc</span>[],<span style="color: #98f5ff;">unsigned</span> <span style="color: #98f5ff;">int</span> <span style="color: #4eee94;">idx</span>)
+{
+        <span style="color: #00bfff; font-weight: bold;">return</span> doc[idx&gt;&gt;5] &amp; (1&lt;&lt;(idx&amp;0x1f));
+}</pre>
+<h4>poj 2518</h4>
+<p class="first">这个好玩，一个4*4的方格，里面分别放四个A,B,C,D，初始状态从输入获取，先随便选取一个字母，然后能进行很多次操作。
+每次能交换两个相邻的方格，到任何一个小的2*2的方格中全部都是所选的字母就获胜。对于每一个输入，求最少多少次交换就能达到胜利状态，
+以及有多少方案可以达到这个目的。</p>
+例如：
+<pre class="example">AABB
+ABAB
+CDCD
+CCDD          output ==&gt; 1 4 (选择A或者B 交换BA 选择C或者D 交换DC)
+
+ACAB
+CBBD
+ADAD
+DCBC          output ==&gt; 4 96</pre>
+
+<p>
+首先想到还是搜索，用bit来减少空间。求最少次数，BFS搜索也许太慢，毕竟每次状态转移会有16个选择。对于每一个输入，先枚举A,B,C,D进行搜索。对于每一个字母，比如A，用一个整数表示其在方格的位置(最大数字到1&lt;&lt;16)，
+</p>
+
+<pre class="example">AABB
+ABAB
+CDCD
+CCDD            state ==&gt; 1100 1010 0000 0000</pre>
+<p>
+胜利的状态有9个，可以先枚举出来，1100110000000000等等。胜利状态比较多，照一般的BFS写下去代码肯定比较复杂，时间和空间肯定也都要求比较多。考虑可以从胜利状态反着向初始状态搜，先把9个胜利状态放入数组，求到初始状态最少的步数，同时可以算出有多少种走法。这样做了还是超时，看有人说线上输入有很多组数据。
+</p>
+
+<p>
+看来每次计算调用了四次BFS确实比较要时间，看提示打表，对于每一个输入先查查看以前计算过没有，计算过则直接输出结果，否则照上面的枚举字母，调用BFS。提交还是超时。
+</p>
+
+<p>
+再想想，每次输入可能A的分布是一样的，其他字母分布不一样，照上面那样做对于A还是BFS搜索了一次。从16个位置选择4个位置给A的总分布数目是C(16,4)=1820，不是很大的。很开心，把A的状态记录下来，对于每个输入先看看A这种布局以前算过了没有，如果算过则不用算了，其他字母都是一样处理。结果还是超时，无语了。
+</p>
+
+<p>
+
+正要崩溃时，发现自己还是没看到本质，对于A的每一个布局，B不是一样么，是A还是B没关系的啊。所以，打表不用分字母需要1820*4这么大的表，只要一个1820的表就行了。对于每个输入，分字母获取四个分布状态，看这个状态以前是否算过了，如果算过直接拿那个结果，如果没算过算了存下来。再提交，终于AC了，：）这一步步够辛苦的。
+</p>

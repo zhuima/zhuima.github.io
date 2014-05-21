@@ -1,0 +1,39 @@
+---
+layout: post
+title: "有趣的调试"
+description: "一次关于Linux信号方面的debug经历"
+category:
+tags: []
+---
+{% include JB/setup %}
+
+你知道的，debug的过程类似于侦探，其中的乐趣妙不可言。今天上午发现了一个有趣的bug，这是在开源软件[runlim](http://manpages.ubuntu.com/manpages/raring/man1/runlim.1.html)里面。我们这用这个还挺多的，我之前也做过一次[介绍](http://localhost:4000/2012/10/29/runlim.html)，这个工具就是用来检测程序使用时间和内存使用情况。我和同事花了一些时间在这个bug上，还是挺有趣的一次debug。
+
+具体的情况是我们之前一直用这个工具，现在来了一台更强劲的24核的机器，正打算在这台机器上弄一套新的benchmark机制。然后发现当在新系统上重新编译这个runlim后，连runlim sleep 4这种运行方式都结束不了。runlim的运行机制很简单，开始后会fork一个子进程来运行execvp，父进程设置一个timer，来定时运行sampler进行cpu和内存的检测。我们通过进程查看器可以看到sleep的进程已经处于僵尸状态，但是runlim还是处于wait状态。wait函数是处于租塞的(waitpid和wait类似，但是waitpid提供了一个wait的非阻塞版)。这样看来是子进程结束了，但是父进程由于某种原因没有得到这个消息，而后又一直等待所以造成了程序无法退出的状况。
+
+
+子进程在退出的时候会发送SIGCHLD信号，内核不会管你是否定义了SIGCHLD的处理函数，都会发送这个信号给父进程。这个信号默认是被忽略的(在Linux系统上如果显式的忽略这个SIGCHLD可以避免僵尸进程的产生，这样等于明确说明父进程将不会wait，子进程自己乖乖的死掉)。
+
+我们注册了一个SIGCHLD的处理函数:
+
+
+结果是没有进入到处理函数里面，这说明没接受到SIGCHLD信号，很奇怪。
+
+然后我考虑到会不会是因为timer的原因，所以我们将sampler里面的实际内容注释掉。果然，这个bug是由于timer的原因造成的，这离真相近了一步。
+
+
+那SIGCHLD到底去哪里了？其实我们可以通过/proc/pid文件夹下查看这个。比如进程号为1234，
+
+cat /proc/1234/status/
+
+里面的内容就是各种信号的状态。
+
+我们可以看到SIGCHLD(17)在被caught那一栏，这看起来像是在sampler里面接收了信号，但是并没有处理，所以这个信息就被丢失了。
+
+我们来尝试fix一下，一个办法是在注册timer的时候加上SIGCHLD的屏蔽。代码可以这样:
+
+
+其实sampler就是一段临界代码，这需要防止捕获不相关的代码。这样也可以在进入sampler之后处理，不过在退出的时候得再把SIGCHLD给解除屏蔽。
+
+
+总的说来，这样的信号中断相关的代码调试比较困难，print大法是惯用的手段。

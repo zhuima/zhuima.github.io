@@ -1,0 +1,50 @@
+---
+layout: post
+title: "C++ 静态成员函数"
+description: ""
+category:
+tags: [Programming, C++]
+---
+{% include JB/setup %}
+
+遇到一个编译的问题，因为重载了静态成员函数。静态成员函数到底能不能重载非静态成员函数，看看标准:
+
+<pre><code>
+ISO 14882:2003 C++ Standard 13.1/2 – Overloadable declarations
+Certain function declarations cannot be overloaded:
+
+1: Function declarations that differ only in the return type cannot be overloaded.
+
+2: Member function declarations with the same name and the same parameter types cannot be overloaded if any of them is a static member function declaration.
+</code></pre>
+
+因为如果这样，当通过一个对象调用函数的时候会引起歧义。只是返回值不同其他相同也是非法的重载。
+
+同样，静态成员函数还有其他限制，比如不能定义为虚函数。
+{% highlight cpp %}
+#include<iostream>
+using namespace std;
+
+class Test {
+public:
+// Error: Virtual member functions cannot be static
+virtual static void fun()  { }
+};
+
+{% endhighlight %}
+这很好理解，静态成员函数是相对于类的，而普通成员函数是相对于对象的。本质区别是静态成员函数不能访问this，继而不能通过vptr访问到vtable。另外C++里面的this是不能作为左值来是用的，即使是在成员函数里面。
+
+静态成员函数不能声明为const或者volatile，const意为函数不会修改一个『对象』的内容，这对static函数来说没意义。
+
+你不能声明两个参数类型相同的static和非static函数，比如这样:
+{% highlight cpp %}
+class Foo {
+public:
+	void print() { cout << "non static" << endl; }
+	static void print() { cout << "static" << endl; }
+
+};
+{% endhighlight %}
+
+
+参考: [c-overload-static-function-with-non-static-function](http://stackoverflow.com/questions/5365689/c-overload-static-function-with-non-static-function)

@@ -1,0 +1,57 @@
+--- 
+published: false
+title: test
+meta: 
+  _edit_last: "1"
+type: post
+status: draft
+layout: post
+tags: 
+- Life|Notes
+---
+
+// @Name   : cycle.c 
+//
+// @Author : Yukang Chen (moorekang@gmail.com)
+// @Date   : 2012-04-11 07:58:17
+//
+// @Brief  :
+
+#include <stdio.h>
+
+
+int detectCycle(int* seq)
+{
+    int slow = 0;
+    int fast = 0;
+    while( 1 ) {
+        slow = seq[slow];
+        fast = seq[seq[fast]];
+        printf("slow: %d fast:%d\n", slow, fast);
+        if( slow == fast )
+            break;
+    }
+    int finder = 0;
+    while(1) {
+        slow   = seq[slow];
+        finder = seq[finder];
+        printf("slow:%d finder:%d\n", slow, finder);
+        if(slow == finder){
+            break;
+        }
+
+    }
+    return finder;
+}
+
+int main()
+{
+    int seq[5];
+    seq[0]=1;
+    seq[1]=3;
+    seq[2]=4;
+    seq[3]=2;
+    seq[4]=0;
+    seq[5]=1;
+    printf("duplicate:%d\n", detectCycle(seq));
+}

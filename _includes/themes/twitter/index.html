@@ -1,0 +1,73 @@
+{% assign latest_post = site.posts.first %}
+
+<div class="row post">
+  <div class="span8">
+    <h1 class="title"><a href="{{ latest_post.url }}" title="{{ latest_post.title }}">{{ latest_post.title }}</a> {% if latest_post.tagline %} <small>{{ latest_post.tagline }}</small>{% endif %}</h1>
+
+    {{ latest_post.content }}
+
+    <ul class="pager">
+      <li class="next"><a href="{{ BASE_PATH }}/archive.html" title="所有文章">查看所有文章 &rarr;</a></li>
+    </ul>
+
+    <!-- <div id="disqus_thread"> -->
+    <!--   <script type="text/javascript"> -->
+    <!-- 	var disqus_developer = 1; -->
+    <!-- 	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */ -->
+    <!-- 	var disqus_shortname = 'yukang'; // required: replace example with your forum shortname -->
+
+    <!-- 	/* * * DON'T EDIT BELOW THIS LINE * * */ -->
+    <!-- 	(function() { -->
+    <!-- 	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; -->
+    <!-- 	dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js'; -->
+    <!-- 	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); -->
+    <!-- 	})(); -->
+    <!-- 	BYB.includeScript('/assets/themes/twitter/prettify/prettify.js',function(){prettyPrint()}); -->
+    <!--   </script> -->
+
+    <!--   <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a> -->
+    <!--   </noscript> -->
+    <!--   <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a> -->
+    <!-- </div> -->
+
+  </div>
+
+
+  <div class="span4 sidebar">
+
+    <h4 class="date">发布日期：<span>{{ latest_post.date | date_to_long_string }}</span></h4>
+    {% unless latest_post.tags == empty %}
+    <h4>标签</h4>
+    <ul class="tag_box">
+      {% assign tags_list = latest_post.tags %}
+      {% include JB/tags_list %}
+    </ul>
+    {% endunless %}
+
+
+    <div class="violet-aside-post">
+      <h4 class="v-section-tit">最近</h4>
+      <ul>
+        {% for rpost in site.posts limit:15  %}
+        <li class="v-aside-li">
+          <a href="{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="violet-aside-post">
+      <h4 class="v-section-tit">页面</h4>
+    <nav class="nav">
+      <ul>
+        <li><a href="/archive.html" >归档</a></li>
+        <li><a href="/tags.html">标签</a></li>
+        <li><a href="/links.html" >链接</a></li>
+        <li><a href="/about.html" >关于</a></li>
+        <li><a href="/atom.xml" target="_blank" >RSS</a></li>
+      </ul>
+    </nav>
+    </div>
+
+  </div>
+</div>
