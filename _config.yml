@@ -11,13 +11,13 @@ pygments: true
 #
 
 title : zhuima's Page
-tagline: Don't Panic
+tagline: 杀戮机器-追马
 author :
   name : zhuima
-  email : moorekang@gmail.com
+  email : 993182876@qq.com
   github : zhuima
   name: zhuima
-  description: "Something noted by Yukang(Programming, Linux, C/C++, Algorithms, Scheme)"
+  description: "Something noted by Zhuima(Programming, Linux, C/C++, Algorithms, Scheme)"
 
 #markdown: rdiscount
 markdown: kramdown
