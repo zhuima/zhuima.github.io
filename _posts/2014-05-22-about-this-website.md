@@ -22,7 +22,7 @@ tags:
 
 闲来无事，就折腾了下`github` + `jekyll`这个组合来自行搭建下，除了速度过慢之外其他都还凑合
 
-### 专注于运维行业五年，扛过的服务器可绕地球小半圈 ###
+### 专注于运维行业五年，扛过的`服务器`可绕地球小半圈 ###
 
 我的邮箱 [993182876@qq.com](993182876@.com)
 
@@ -30,7 +30,8 @@ tags:
 ### 想要培训的兄弟，推荐去马哥教育，绝对物超所值 ###
 
 马哥教育官网：[http://www.magedu.com](http://www.magedu.com)
-![logo](/Desktop/logo.png)
+
+![logo](/home/zhuima/Desktop/logo.png)
 
 
 
