@@ -14,13 +14,14 @@ tags:
 - lnmp
 ---
 
-### 安装`lnmp`简介 ###
-### 安装`zabbix`简介###
+##### 安装`lnmp`简介 #####
 
-1. ### 手动编译安装分布式lnmp ###
+1. ### 手动编译安装分布式`lnmp` ###
 			
 			git clone git@github.com:zhuima/zhuima.github.io.git
 
 2. ### 查看官网介绍 ###
 [官网地址](http://blog.unix178.com),正在尝试写博客.
+
+3. :wq
 
