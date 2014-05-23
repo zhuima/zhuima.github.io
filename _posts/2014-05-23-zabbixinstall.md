@@ -19,6 +19,7 @@ tags:
 1. ### 手动编译安装分布式`lnmp` ###
 			
 - 这里使用别人的一键安装包，仅供参考(许久没有更新，不建议使用)
+			
 			wget -c http://soft.vpser.net/lnmp/lnmp1.0-full.tar.gz && tar zxvf lnmp1.0-full.tar.gz && cd lnmp1.0-full && screen -S lnmp  && ./centos.sh
 
 2. ### 新建zabbix用户和组 ###
