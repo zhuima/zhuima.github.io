@@ -18,9 +18,9 @@ tags:
 
 1.在客户端上添加监控项目
 
-** 有多种方式可以实现,`cat /proc/diskstats`和`iostat`都可以实现**
+**有多种方式可以实现,`cat /proc/diskstats`和`iostat`都可以实现**
 
-** 使用`iostat`的时候，要检测系统上是否安装了`sysstat`**
+**使用`iostat`的时候，要检测系统上是否安装了`sysstat`**
 
     {% highlight cl %}
 
@@ -47,7 +47,7 @@ tags:
 
 **直接上图吧，不说了**
 
-**自定义监控项**
+**自定义监控项,对应客户端配置文件下添加的自定义项**
 
 <img src="/images/disk_io.png" alt="Sanjose" class="img-center" />
 
