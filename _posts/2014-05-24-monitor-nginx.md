@@ -15,7 +15,7 @@ tags:
 - shell
 ---
 
-##zabbix` 监控`nginx` ##
+##`zabbix` 监控`nginx` ##
 
 1.解读`nginx`的`status`包含字段意义
 
