@@ -18,6 +18,7 @@ tags:
 ##zabbix` 监控`nginx` ##
 
 1.解读`nginx`的`status`包含字段意义
+
 > Active connections活动连接数
 
 > server accepts handled requests下的三个数：
@@ -44,9 +45,10 @@ _____________________________________________________________
 
     
     {% highlight cl %}
-    # 取消改行的注释
+    // 取消改行的注释
     Include=/usr/local/etc/zabbix_agentd.conf.d/
-    # 取消改行注释，并把0更改为1
+    
+	// 取消改行注释，并把0更改为1
     UnsafeUserParameters=1
     {% endhighlight %}
     
@@ -54,6 +56,7 @@ _____________________________________________________________
 
 在`/usr/local/etc/zabbix_agentd.conf.d/`目录下创建一个`nginx_status.conf`文件，并添加如下内容
     
+    {% highlight cl %}
     UserParameter=nginx.accepts,/usr/local/sbin/nginx_status.sh accepts
     UserParameter=nginx.handled,/usr/local/sbin/nginx_status.sh handled
     UserParameter=nginx.requests,/usr/local/sbin/nginx_status.sh requests
@@ -61,6 +64,7 @@ _____________________________________________________________
     UserParameter=nginx.connections.reading,/usr/local/sbin/nginx_status.sh reading
     UserParameter=nginx.connections.writing,/usr/local/sbin/nginx_status.sh writing
     UserParameter=nginx.connections.waiting,/usr/local/sbin/nginx_status.sh waiting
+    {% endhighlight %}
     
 _______________________________________________________________________
 
@@ -68,6 +72,7 @@ _______________________________________________________________________
 
 脚步内容如下：
     
+    {% highlight cl %}
     [root@nginx zabbix-2.2.0]# cat /usr/local/sbin/nginx_status.sh 
     #!/bin/bash
     #script to fetch nginx statuses for tribily monitoring systems
@@ -123,18 +128,22 @@ _______________________________________________________________________
     
     # Run the requested function
     $1 
+    {% endhighlight %}
     
 ________________________________________________________________________________
 
 5.设置nginx.conf文件
 
 配置`/status`权限相关
-    	location /status {
+    	
+		{% highlight cl %}
+		location /status {
 			stub_status on;
 			allow 127.0.0.1;
 			allow 192.168.146.130;
 			deny all;
 			access_log   off;
+		{% endhighlight %}
 
 6.客户端重启`zabbix_agentd`和`nginx`服务
 
