@@ -19,15 +19,15 @@ tags:
 
 1.解读`nginx`的`status`包含字段意义
 
-> Active connections活动连接数
+> Active connections：活动连接数
 
 > server accepts handled requests下的三个数：
 
->> 已接受过的连接数
+>> accepts：已接受过的连接数
 
->> 已处理过的连接数
+>> handled：已处理过的连接数
 
->> 处理的请求数
+>> requests：处理的请求数
 
 >>（连接和请求的区别：当开启keepalive之后一个连接可发起多个请求）
 
