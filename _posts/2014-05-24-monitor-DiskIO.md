@@ -40,8 +40,7 @@ tags:
     UserParameter=io_sda_await,iostat -x  /dev/sda | sed -n '7p' | awk '{print $10}'
     {% endhighlight %}
      
-
-————————————————————————————————————————————————————
+_______________________________________________
 
 2.zabbix服务器上添加自定义的`items`
 
