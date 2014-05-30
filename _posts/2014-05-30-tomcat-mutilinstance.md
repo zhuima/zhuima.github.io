@@ -15,19 +15,19 @@ tags:
 ---
 
 
-## `tomcat`一机多实例的实现
+## `tomcat` and `jdk`安装
 
 ### 1. `jdk`的安装配置
 
 > - 安装`jdk`
 
-``` python
+```  
 tar xf $DIR/jdk-7u9-linux-x64.tar.gz -C /usr/java/ &>/dev/null
 ```
 
 > - 配置jdk环境变量
 
-``` python
+```  
 cat >> /etc/profile.d/java.sh << EOF
 export JAVA_HOME=/usr/java/jdk1.7.0_09
 export PATH=$PATH:$JAVA_HOME/bin
@@ -39,7 +39,7 @@ EOF
 
 > -  测试效果
 
-``` python
+```  
 ot@tomcat1 usr]# java -version
 java version "1.7.0_09"
 Java(TM) SE Runtime Environment (build 1.7.0_09-b05)
@@ -53,7 +53,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02, mixed mode)
 
 ------------------------------------
 
-### 1. 单实例多站点的配置
+## 单实例多站点的配置
 
 **单实例的优缺点**
 
@@ -63,7 +63,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02, mixed mode)
 
 **配置** `server.xml`文件配置中关于主机的定义
 
-``` python
+```  
  <Connector port="80" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" />
@@ -86,7 +86,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.5-b02, mixed mode)
 
 **访问测试**
 
-``` python
+```  
 [root@tomcat1 conf]# for x in www local;do curl -I http://$x.zhuima.xxx;done
 
 HTTP/1.1 200 OK
@@ -112,22 +112,22 @@ Accept-Ranges: bytes
 
 ------------------------------------------------
 
-### 2. 多实例多站点的配置
+## 多实例多站点的配置
 
 
-**多实例的优缺点**
+### **多实例的优缺点**
 
 > - 各实例间分开部署，相互之间无影响
 
 > - 一机器多实例的部署，对系统内容要求比较高
 
-**配置**安装`apache-tomcat`的时候，多复制几份
+### **配置**安装`apache-tomcat`的时候，多复制几份
 
 ### 1. 配置每个实例的`tomcat`文件
 
-> `tomcat1`的环境变量配置
+> - `tomcat1`的环境变量配置
 
-``` python
+```  
 [root@tomcat1 conf]# cat /etc/profile.d/tomcat1.sh 
 #################################################
 # File Name: /etc/profile.d/tomcat1.sh
@@ -140,9 +140,9 @@ export CATALINA_HOME=/usr/local/tomcat1
 export PATH=$PATH:$CATALINA_HOME/bin
 ```
 
-> `tomcat2`的环境变量配置
+> - `tomcat2`的环境变量配置
 
-``` python
+```  
 [root@tomcat1 conf]# cat /etc/profile.d/tomcat2.sh 
 #################################################
 # File Name: /etc/profile.d/tomcat2.sh
@@ -160,7 +160,7 @@ export PATH=$PATH:$CATALINA_HOME/bin
 
 > - `tomcat1`的init文件
 
-``` python
+```  
 ################################################
 # File Name: /etc/rc.d/init.d/inittomcat.sh
 # Author: zhuima
@@ -178,7 +178,7 @@ export PATH=$PATH:$CATALINA_HOME/bin
 
 > - `tomcat2`的init文件
 
-``` python
+```  
 ################################################
 # File Name: /etc/rc.d/init.d/inittomcat.sh
 # Author: zhuima
@@ -199,9 +199,9 @@ export PATH=$PATH:$CATALINA_HOME/bin
 ### 3. 配置每个实例的`server.xml`文件
 
 
-> `tomcat1`的`server.xml`配置
+> - `tomcat1`的`server.xml`配置
 
-``` python
+```  
 <Server port="8005" shutdown="SHUTDOWN">
 <Service name="Catalina">
 <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
@@ -216,9 +216,9 @@ export PATH=$PATH:$CATALINA_HOME/bin
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 ```
 
-> `tomcat2`的`server.xml`配置
+> - `tomcat2`的`server.xml`配置
 
-``` python
+```  
 <Server port="8006" shutdown="SHUTDOWN">
 <Service name="Catalina">
 <Connector port="8010" protocol="AJP/1.3" redirectPort="8443" />
@@ -233,9 +233,9 @@ export PATH=$PATH:$CATALINA_HOME/bin
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 ```
 
-**测试效果**
+### **测试效果**
 
-``` python
+```  
 [root@tomcat1 conf]# ss -tunlp | grep java
 tcp    LISTEN     0      100                   :::8080                 :::*      users:(("java",1697,40))
 tcp    LISTEN     0      100                   :::8081                 :::*      users:(("java",1727,40))
@@ -246,9 +246,9 @@ tcp    LISTEN     0      100                   :::8010                 :::*     
 [root@tomcat1 conf]# 
 ```
 
-**访问效果**
+### **访问效果**
 
-``` python
+```  
 [root@tomcat1 conf]# for x in `seq 8080 8081`;do curl -I http://192.168.146.132:$x;done
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
@@ -266,7 +266,7 @@ Date: Sat, 17 May 2014 01:32:18 GMT
 ```
 
 
-**参考站点**
+### **参考站点**
 
 [tomcat配置文件参数，一机多实例管理配置.详解](http://blog.coocla.org/224.html)
 
