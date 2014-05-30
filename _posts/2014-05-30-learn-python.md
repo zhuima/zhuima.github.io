@@ -18,7 +18,7 @@ tags:
 ##首先介绍下 `Comyn` 老师
 
 
-[**comyn**](http://xueming.li/)老师:
+### [**comyn**](http://xueming.li/)老师:
 
 
 `python` 大神，原*大众点评运维平台架构师*，现腾讯广告部核心运维专家，多年一线运维经验，参与过架构改造、平台迁移、自动化建设等运维核心项目，对开源系统都有深入理解，如 `LVS`、 `Haproxy`、 `MogileFS`、 `Varnish`、 `Nginx`等，曾修改 `iptables` 内核实现实时流量镜像复制，奠定了大型公司流量无损压力测试模型。被广大网友称之为“扫地僧”，无所不能，从装机、到写代码、到千万 PV 架构细节、都有深入研究。
@@ -100,7 +100,7 @@ tags:
 
 ## 嘿嘿，这里再把斌哥的信息给贴下
 
-[斌哥的网站](opslinux.com)
+### [斌哥的网站](opslinux.com)
 
 <img src="/images/intorduce.png" alt="Sanjose" class="img-center" />
 	
