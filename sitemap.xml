@@ -1,28 +1,39 @@
 ---
-layout: nil
+# Remember to set production_url in your _config.yml file!
+title : Sitemap
 ---
+
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+
   {% for post in site.posts %}
   <url>
-    <loc>{{ site.baseurl }}{{ post.url }}</loc>
-    {% if post.lastmod == null %}
+    <loc>{{ site.production_url }}{{ post.url }}</loc>
+    <changefreq>daily</changefreq>
     <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
-    {% else %}
-    <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
-    {% endif %}
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.8</priority>
   </url>
   {% endfor %}
+
   {% for page in site.pages %}
-  {% if page.sitemap != null and page.sitemap != empty %}
+  {% if page.layout != nil %}
+  {% if page.layout != 'feed' %}
+  {% if page.group == 'navigation' %}
   <url>
-    <loc>{{ site.baseurl }}{{ page.url }}</loc>
-    <lastmod>{{ page.sitemap.lastmod | date_to_xmlschema }}</lastmod>
-    <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-    <priority>{{ page.sitemap.priority }}</priority>
+    <loc>{{ site.production_url }}{{ page.url | remove: 'index.html' }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   {% endif %}
+  {% endif %}
+  {% endif %}
   {% endfor %}
+
+  <url>
+    <loc>{{ site.production_url }}</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

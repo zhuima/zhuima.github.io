@@ -1,7 +1,3 @@
 User-agent: *
-Disallow: /css/
-Disallow: /js/
-Disallow: /works/
-Disallow: /backs/
-
-Sitemap: <http://blog.unix178.com/sitemap.xml>
+Disallow: /page*
+#Sitemap: http://havee.me/sitemap.xml
