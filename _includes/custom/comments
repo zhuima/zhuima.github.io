@@ -1,5 +1,4 @@
-{% if site.JB.comments.provider == "duoshuo" and page.comments != false %}
-<div id="comments">
-  <div class="ds-thread" {% if page.id %}data-thread-key="{{ page.id }}"{% endif %}  data-title="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}"></div>
-</div>
-{% endif %}
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1938116"></script>
+<!-- UY END -->
