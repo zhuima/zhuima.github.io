@@ -1,10 +1,15 @@
-{% if site.safe and site.JB.sharing.provider == "baidu" and page.path contains '_posts' %}
-<div class="bdsharebuttonbox pull-right">
-  <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-  <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-  <a title="分享到网易微博" href="#" class="bds_t163" data-cmd="t163"></a>
-  <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-  <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-  <a href="#" class="bds_more" data-cmd="more"></a>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share?uid=1938116" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
 </div>
-{% endif %}
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1938116" charset="utf-8"></script>
+<!-- JiaThis Button END -->
