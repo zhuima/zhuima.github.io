@@ -17,6 +17,7 @@ tags:
 
 ##首先介绍下 `Comyn` 老师
 
+<!-- more -->
 
 ### [**comyn**](http://xueming.li/)老师:
 
