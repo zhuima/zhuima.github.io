@@ -44,7 +44,7 @@ JB :
 
   # 评论，provider 留空或 false 关闭评论
   comments : 
-    provider :  custom                    # 采用那种评论，可填 duoshuo 或 disqus 或其他 ...
+    provider :                # 采用那种评论，可填 duoshuo 或 disqus 或其他 ...
     #disqus :
     #  short_name :
     #livefyre :
