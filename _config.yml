@@ -45,29 +45,29 @@ JB :
   # 评论，provider 留空或 false 关闭评论
   comments : 
     provider :  custom                    # 采用那种评论，可填 duoshuo 或 disqus 或其他 ...
-    disqus :
-      short_name :
-    livefyre :
-      site_id :
-    intensedebate :
-      account :
-    facebook :
-      appid :
-      num_posts:
-      width: 580
-      colorscheme: light
-    duoshuo :
-      name : shortname              # 多说上获取的 shortname
-      rcomments :                   # 首页侧边栏最新评论
-        num: 10                     # 最新评论显示条数
-        avatar : 0                  # 最新评论是否显示头像
-        time: 0
-        title : 0
-        admin : 0
-        length : 12                 # 最新评论显示的长度
-      rvisitors :                   # 首页侧边栏最新访客
-        num : 12                    # 最新访客数目
-        size : 45                   # 最新访客头像的尺寸
+    #disqus :
+    #  short_name :
+    #livefyre :
+    #  site_id :
+    #intensedebate :
+    #  account :
+    #facebook :
+    #  appid :
+    #  num_posts:
+    #  width: 580
+    #  colorscheme: light
+    #duoshuo :
+    #  name : shortname              # 多说上获取的 shortname
+    #  rcomments :                   # 首页侧边栏最新评论
+    #    num: 10                     # 最新评论显示条数
+    #    avatar : 0                  # 最新评论是否显示头像
+    #    time: 0
+    #    title : 0
+    #    admin : 0
+    #    length : 12                 # 最新评论显示的长度
+    #  rvisitors :                   # 首页侧边栏最新访客
+    #    num : 12                    # 最新访客数目
+    #    size : 45                   # 最新访客头像的尺寸
 
   # 网站统计
   analytics :
