@@ -109,4 +109,6 @@ JB :
   blogroll : true                   # true 开启，留空或 false 关闭
   brlist :
     - text : 追 马
-      url : //unix178.com/
+      url : http://blog.unix178.com/
+    - text : Linux 培训 
+      url : http://www.magedu.com/
